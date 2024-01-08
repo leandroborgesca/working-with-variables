@@ -5,9 +5,20 @@ on:
     push: 
 jobs:
     ubuntu:
+        env:
+            JOB_ENVIRONMENT_VARIABLE: 'custom job environment variable for ubuntu'
         runs-on: ubuntu-latest
         steps:
             - name: Print custom environment variables from ubuntu-latest
+              env:
+                STEP_ENVIRONMENT_VARIABLE: 'custom step environemtn variable for bash'
               run: |
                 echo "Accessing environment variables in run command"
                 echo "$WORKSPACE_ENVIRONMENT_VARIABLE"
+                echo "$JOB_ENVIRONMENT_VARIABLE"
+                echo "$STEP_ENVIRONMENT_VARIABLE"
+                echo "--------------------------------------------------"
+                echo "Accessing environemnt variables using env context"
+                echo "${{ env.WORKSPACE_ENVIRONMENT_VARIABLE }}"
+                echo "${{ env.JOB_ENVIRONMENT_VARIABLE }}"
+                echo "${{ env.STEP_ENVIRONMENT_VARIABLE }}"
